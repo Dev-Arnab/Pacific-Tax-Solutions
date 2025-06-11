@@ -1,21 +1,54 @@
 // Mobile Menu Toggle
-
 const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
-mobileMenuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    mobileMenuToggle.classList.toggle('active');
-});
+if (mobileMenuToggle && navMenu) {
+    console.log('Mobile menu toggle and nav menu found');
+    const toggleMenu = (e) => {
+        e.preventDefault(); // Prevent default for both click and touch
+        console.log('Hamburger menu triggered (event type: ' + e.type + ')');
+        navMenu.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+    };
+    // Handle both click and touch events
+    ['click', 'touchstart'].forEach(eventType => {
+        mobileMenuToggle.addEventListener(eventType, toggleMenu, { passive: false });
+    });
+} else {
+    console.error('Mobile menu toggle or nav menu not found');
+}
 
-// Close mobile menu when clicking on a link
-const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+// Add touch support for closing menu on link tap
 navLinks.forEach(link => {
-    link.addEventListener('click', () => {
+    link.addEventListener('touchstart', (e) => {
+        e.preventDefault();
         navMenu.classList.remove('active');
         mobileMenuToggle.classList.remove('active');
-    });
+        // Trigger the link's default behavior (e.g., navigate to href)
+        if (link.href) {
+            window.location.href = link.href;
+        }
+    }, { passive: false });
 });
+
+// Mobile Menu Toggle
+
+// const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+// const navMenu = document.getElementById('nav-menu');
+
+// mobileMenuToggle.addEventListener('click', () => {
+//     navMenu.classList.toggle('active');
+//     mobileMenuToggle.classList.toggle('active');
+// });
+
+// // Close mobile menu when clicking on a link
+// const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+// navLinks.forEach(link => {
+//     link.addEventListener('click', () => {
+//         navMenu.classList.remove('active');
+//         mobileMenuToggle.classList.remove('active');
+//     });
+// });
 
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
