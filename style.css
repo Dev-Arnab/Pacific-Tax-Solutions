@@ -40,7 +40,7 @@ body {
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1650px;
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
@@ -52,7 +52,12 @@ body {
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+}
+
+.nav-logo img {
+    width: 60px;
+    padding-top: 10px;
 }
 
 .logo-icon {
