@@ -18,6 +18,19 @@ if (mobileMenuToggle && navMenu) {
     console.error('Mobile menu toggle or nav menu not found');
 }
 
+// Toggle services dropdown on mobile
+const dropdownToggle = document.querySelector('.dropdown-toggle');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+
+if (dropdownToggle && dropdownMenu) {
+    ['click', 'touchstart'].forEach(eventType => {
+        dropdownToggle.addEventListener(eventType, (e) => {
+            e.preventDefault();
+            dropdownMenu.classList.toggle('active');
+        }, { passive: false });
+    });
+}
+
 // Add touch support for closing menu on link tap
 // navLinks.forEach(link => {
 //     link.addEventListener('touchstart', (e) => {
