@@ -19,16 +19,32 @@ if (mobileMenuToggle && navMenu) {
 }
 
 // Add touch support for closing menu on link tap
+// navLinks.forEach(link => {
+//     link.addEventListener('touchstart', (e) => {
+//         e.preventDefault();
+//         navMenu.classList.remove('active');
+//         mobileMenuToggle.classList.remove('active');
+//         // Trigger the link's default behavior (e.g., navigate to href)
+//         if (link.href) {
+//             window.location.href = link.href;
+//         }
+//     }, { passive: false });
+// });
+
+// Close mobile menu when clicking or tapping on a link
+const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
 navLinks.forEach(link => {
-    link.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        navMenu.classList.remove('active');
-        mobileMenuToggle.classList.remove('active');
-        // Trigger the link's default behavior (e.g., navigate to href)
-        if (link.href) {
-            window.location.href = link.href;
-        }
-    }, { passive: false });
+    ['click', 'touchstart'].forEach(eventType => {
+        link.addEventListener(eventType, (e) => {
+            e.preventDefault();
+            navMenu.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+            // Navigate to the link's href after closing the menu
+            if (link.href && eventType === 'click') {
+                window.location.href = link.href;
+            }
+        }, { passive: false });
+    });
 });
 
 // Mobile Menu Toggle
